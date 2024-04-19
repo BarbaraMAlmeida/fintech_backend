@@ -1,7 +1,7 @@
-package br.com.barbara.fintech.entities;
+package br.com.fintech.entities;
 
 
-import br.com.barbara.fintech.enums.TipoTransacao;
+import br.com.fintech.enums.TipoTransacao;
 
 import java.io.Serializable;
 import java.time.LocalDate;

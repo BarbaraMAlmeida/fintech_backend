@@ -1,8 +1,8 @@
-package br.com.barbara.fintech;
+package br.com.fintech;
 
-import br.com.barbara.fintech.dao.CategoriaDAO;
-import br.com.barbara.fintech.dao.CategoriaDAOImpl;
-import br.com.barbara.fintech.entities.Categoria;
+import br.com.fintech.dao.CategoriaDAO;
+import br.com.fintech.dao.CategoriaDAOImpl;
+import br.com.fintech.entities.Categoria;
 
 public class TesteMain {
     public static void main(String[] args) {
@@ -10,10 +10,10 @@ public class TesteMain {
             CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
             Categoria categoria = new Categoria();
-            categoria.setId(82);
-            categoria.setNomeCategoria("TESTE PELO JAVA 3");
+            categoria.setId(6);
+            categoria.setNomeCategoria("Em grupo teste 02");
+            categoria.setDescricao("Descrição");
             categoriaDAO.cadastrar(categoria);
-
         }
         catch (Exception e) {
             e.printStackTrace();

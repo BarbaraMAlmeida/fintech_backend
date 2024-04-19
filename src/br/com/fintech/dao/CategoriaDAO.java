@@ -1,6 +1,6 @@
-package br.com.barbara.fintech.dao;
+package br.com.fintech.dao;
 
-import br.com.barbara.fintech.entities.Categoria;
+import br.com.fintech.entities.Categoria;
 
 import java.sql.SQLException;
 import java.util.List;

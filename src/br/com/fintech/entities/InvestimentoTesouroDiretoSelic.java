@@ -1,4 +1,4 @@
-package br.com.barbara.fintech.entities;
+package br.com.fintech.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package br.com.barbara.fintech.enums;
+package br.com.fintech.enums;
 
 public enum TipoTransacao {
     RECEITA,

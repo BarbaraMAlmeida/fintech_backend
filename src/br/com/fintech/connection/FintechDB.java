@@ -1,8 +1,7 @@
-package br.com.barbara.fintech.connection;
+package br.com.fintech.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class FintechDB {
     public static Connection getConnectionDB () {

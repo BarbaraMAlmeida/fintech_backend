@@ -1,7 +1,7 @@
-package br.com.barbara.fintech.dao;
+package br.com.fintech.dao;
 
-import br.com.barbara.fintech.connection.FintechDB;
-import br.com.barbara.fintech.entities.Categoria;
+import br.com.fintech.connection.FintechDB;
+import br.com.fintech.entities.Categoria;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +18,15 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         try {
             connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
-                    "INSERT INTO T_GENERO VALUES (?,?)"
+                    "INSERT INTO T_CATEGORIA VALUES (?,?,?)"
             );
 
             preparedStatement.setInt(1, categoria.getId());
             preparedStatement.setString(2, categoria.getNomeCategoria());
+            preparedStatement.setString(3, categoria.getDescricao());
             preparedStatement.executeUpdate();
 
-            System.out.println(("O produto foi gravado!!"));
+            System.out.println(("A categoria foi gravada!!"));
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
