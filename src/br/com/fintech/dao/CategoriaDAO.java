@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface CategoriaDAO {
 
-    void cadastrar(Categoria categoria) throws SQLException;
+    void insert(Categoria categoria) throws SQLException;
 
-    Categoria editar(int id, Categoria categoria);
+    Categoria update(int id, Categoria categoria) throws SQLException;
 
-    void excluir(int id);
+    void delete(int id) throws SQLException;
 
-    List<Categoria> listar();
+    List<Categoria> getAll() throws SQLException;
 }
