@@ -4,34 +4,38 @@ package br.com.fintech.entities;
 import br.com.fintech.enums.TipoTransacao;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Transacao extends Moeda implements Serializable {
     private int id;
-    private String descricao;
+    private Double valTransacao;
     private LocalDate dtLancamento;
     private TipoTransacao tipoTransacao;
     private Categoria categoria;
+    private Usuario usuario;
 
     public Transacao() {
 
     }
 
-    public Transacao(int id, String descricao, LocalDate dtLancamento, TipoTransacao tipoTransacao, Categoria categoria) {
+    public Transacao(int id, Double valTransacao, Usuario usuario, LocalDate dtLancamento, TipoTransacao tipoTransacao, Categoria categoria) {
         this.id = id;
-        this.descricao = descricao;
         this.dtLancamento = dtLancamento;
         this.tipoTransacao = tipoTransacao;
         this.categoria = categoria;
+        this.valTransacao = valTransacao;
+        this.usuario = usuario;
+        
     }
 
-    public Transacao(int id, Double valor, String descricao, LocalDate dtLancamento, TipoTransacao tipoTransacao, Categoria categoria) {
-        super(valor);
+    public Transacao(int id, Double valTransacao, Usuario usuario, String descricao, LocalDate dtLancamento, TipoTransacao tipoTransacao, Categoria categoria) {
         this.id = id;
-        this.descricao = descricao;
         this.dtLancamento = dtLancamento;
         this.tipoTransacao = tipoTransacao;
         this.categoria = categoria;
+        this.valTransacao = valTransacao;
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -42,14 +46,22 @@ public class Transacao extends Moeda implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public Double getValTransacao() {
+        return valTransacao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setValTransacao(Double valTransacao) {
+        this.valTransacao = valTransacao;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
     public LocalDate getDtLancamento() {
         return dtLancamento;
     }
@@ -86,12 +98,5 @@ public class Transacao extends Moeda implements Serializable {
         System.out.println("Transacao deletada");
     }
 
-    public Transacao listar() {
-        Categoria categoria = new Categoria(54,"Roupas mensais", "Roupas novas do mês");
-        Transacao transacao =  new Transacao(80, 150.00,
-                "Roupas novas", LocalDate.now(), TipoTransacao.DESPESA,
-                categoria);
-        cadastrar();
-        return transacao;
+
     }
-}
