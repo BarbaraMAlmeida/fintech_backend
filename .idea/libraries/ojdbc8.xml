@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="ojdbc8">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$PROJECT_DIR$/src/lib/ojdbc8.jar!/" />
+=======
+      <root url="jar://$PROJECT_DIR$/../../ojdbc8.jar!/" />
+>>>>>>> 96b37adf3b15476a6969f36135831ccf97b18206
     </CLASSES>
     <JAVADOC />
     <SOURCES />
