@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class FintechDB {
 
+
     private static FintechDB instance;
     private Connection connection;
 
@@ -34,4 +35,3 @@ public class FintechDB {
         return connection;
     }
 }
-
