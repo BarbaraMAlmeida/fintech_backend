@@ -10,7 +10,7 @@ public class FintechDB {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conecction = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "RM552825", "220105");
+                    "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "sys", "2216039");
 
             conecction.setAutoCommit(false);
         } catch (Exception e) {
