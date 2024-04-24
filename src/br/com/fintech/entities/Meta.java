@@ -1,15 +1,16 @@
 package br.com.fintech.entities;
 
-
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Meta extends Moeda implements Serializable {
     private int id;
     private String nomeMeta;
     private LocalDate dtFimMeta;
-
-    public Meta() {
+    public Meta () {
+}
+    public Meta(int i, String string, Date date) {
 
     }
 
