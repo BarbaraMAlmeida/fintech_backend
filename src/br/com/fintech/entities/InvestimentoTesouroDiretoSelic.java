@@ -2,9 +2,11 @@ package br.com.fintech.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-public class InvestimentoTesouroDiretoSelic extends Investimento implements Serializable {
-    private double taxaSelicAnual;
 
+public class InvestimentoTesouroDiretoSelic extends Investimento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+    private double taxaSelicAnual;
     private LocalDate dtVencimento;
 
     public InvestimentoTesouroDiretoSelic() {}

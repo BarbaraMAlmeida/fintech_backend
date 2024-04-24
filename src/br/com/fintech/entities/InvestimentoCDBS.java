@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class InvestimentoCDBS extends Investimento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private double taxaCdi;
     private double percentualCdi;
     private LocalDate dtVencimento;

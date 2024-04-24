@@ -2,13 +2,9 @@ package br.com.fintech;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import br.com.fintech.dao.CategoriaDAO;
-import br.com.fintech.dao.CategoriaDAOImpl;
 import br.com.fintech.dao.InvestimentoDAO;
 import br.com.fintech.dao.InvestimentoDAOImpl;
 import br.com.fintech.entities.Banco;
-import br.com.fintech.entities.Categoria;
 import br.com.fintech.entities.Investimento;
 import br.com.fintech.entities.InvestimentoCDBS;
 import br.com.fintech.entities.Usuario;
@@ -17,10 +13,10 @@ import br.com.fintech.enums.TipoInvestimento;
 public class TesteInvestimento {
 
 	 public static void main(String[] args) {
-		 	//cadastrarInvestimento();
-	        //editarInvestimento();
-	        //deletarInvestimento();
-	        getAllInvestimentos();
+		 	cadastrarInvestimento();
+//	        editarInvestimento();
+//	        deletarInvestimento();
+//	        getAllInvestimentos();
 	    }
 
 	 public static void cadastrarInvestimento() {
@@ -68,7 +64,7 @@ public class TesteInvestimento {
 
 	    public static void deletarInvestimento() {
 	        try {
-	            int idEdit = 29;
+	            int idEdit = 27;
 	            InvestimentoDAO investimentoDAO = new InvestimentoDAOImpl();
 
 	            investimentoDAO.delete(idEdit);

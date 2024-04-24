@@ -2,12 +2,12 @@ package br.com.fintech.entities;
 
 
 import br.com.fintech.enums.TipoTransacao;
-
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Transacao extends Moeda implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int id;
     private Double valTransacao;
     private LocalDate dtLancamento;
@@ -86,17 +86,11 @@ public class Transacao extends Moeda implements Serializable {
         this.categoria = categoria;
     }
 
-    public void cadastrar() {
-        System.out.println("Transação de " + this.getValor() + " criada.");
-    }
-
-    public void editar(int id, Transacao transacao) {
-        System.out.println("Transacao atualizada");
-    }
-
-    public void excluir(int id) {
-        System.out.println("Transacao deletada");
-    }
-
-
+	@Override
+	public String toString() {
+		return "Transacao [id =" + id + ", valTransacao =" + valTransacao + ", dtLancamento =" + dtLancamento
+				+ ", tipoTransacao =" + tipoTransacao + ", categoria =" + categoria + ", usuario =" + usuario + "]";
+	}
+    
+  
     }

@@ -4,19 +4,12 @@ import java.io.Serializable;
 
 public class Banco implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     private int idBanco;
     private int cdBanco;
     private String nmBanco;
 
-    @Override
-    public String toString() {
-        return "Banco{" +
-                "idBanco=" + idBanco +
-                ", cdBanco=" + cdBanco +
-                ", nmBanco='" + nmBanco + '\'' +
-                '}';
-    }
-
+ 
     public Banco() {
 
     }
@@ -50,5 +43,15 @@ public class Banco implements Serializable {
     public void setNomeBanco(String nomeBanco) {
         this.nmBanco = nomeBanco;
     }
+    
+    @Override
+    public String toString() {
+        return "Banco [" +
+                "idBanco=" + idBanco +
+                ", cdBanco=" + cdBanco +
+                ", nmBanco='" + nmBanco + '\'' +
+                ']';
+    }
+
 
 }

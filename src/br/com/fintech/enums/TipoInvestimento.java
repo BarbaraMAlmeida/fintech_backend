@@ -13,5 +13,4 @@ public enum TipoInvestimento {
         return this.cd_tipo_investimento;
     }
 
-	
 }

@@ -2,7 +2,6 @@ package br.com.fintech.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import br.com.fintech.enums.TipoInvestimento;
 
 
@@ -18,15 +17,14 @@ public abstract class Investimento extends Moeda implements Serializable {
     private TipoInvestimento tipoInvestimento;
 
 
-
-
 	public Investimento() {
 
     }
 	
-	public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, Usuario usuario,
-			LocalDate dtVencimento, TipoInvestimento tipoInvestimento) {
-		super();
+
+    public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, Usuario usuario,
+			LocalDate dtVencimento, TipoInvestimento tipoInvestimento, double valor) {
+    	 super(valor);
 		this.id = id;
 		this.valorRetirado = valorRetirado;
 		this.dtInvestimento = dtInvestimento;
@@ -36,19 +34,8 @@ public abstract class Investimento extends Moeda implements Serializable {
 		this.tipoInvestimento = tipoInvestimento;
 	}
 
-	
-	public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, Usuario usuario, LocalDate dtVencimento) {
-		super();
-		this.id = id;
-		this.valorRetirado = valorRetirado;
-		this.dtInvestimento = dtInvestimento;
-		this.banco = banco;
-		this.usuario = usuario;
-		this.dtVencimento = dtVencimento;
-	}
 
-
-    public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco) {
+	public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco) {
         this.id = id;
         this.valorRetirado = valorRetirado;
         this.dtInvestimento = dtInvestimento;
@@ -126,6 +113,8 @@ public abstract class Investimento extends Moeda implements Serializable {
                 + ", banco = " + banco.getId()
                 + ", valor = " + getValor()
                 + ", data do investimento = " + dtInvestimento
+                + ", usuario vinculado = " + usuario.getNomeUsuario()
+                + ", tipo do investimento = " + tipoInvestimento
                 + "]";
     }
     

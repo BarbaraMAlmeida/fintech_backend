@@ -3,6 +3,7 @@ package br.com.fintech.entities;
 import java.io.Serializable;
 
 public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     private String nomeCategoria;
     private String descricao;

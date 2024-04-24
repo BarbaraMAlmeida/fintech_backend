@@ -4,16 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int id;
-
     private String nomeUsuario;
-
     private LocalDate dtNascimento;
-
     private Genero genero;
-
     private String email;
-
     private String senha;
 
     public Usuario() {
@@ -77,21 +74,11 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nomeUsuario=" + nomeUsuario + ", dtNascimento=" + dtNascimento + ", genero="
+				+ genero + ", email=" + email + ", senha=" + senha + "]";
+	}
 
-    public void login() {
-        System.out.println("Login feito com sucesso!");
-    }
-
-    public void logout() {
-        System.out.println("Você saiu do sistema.");
-    }
-
-    public void cadastrar() {
-        System.out.println("Usuário" + this.nomeUsuario + " criado.");
-    }
-
-    public void excluir(int id) {
-        System.out.println("Usuário deletado.");
-    }
 
 }

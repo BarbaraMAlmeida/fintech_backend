@@ -2,10 +2,7 @@ package br.com.fintech;
 
 import br.com.fintech.dao.BancoDAO;
 import br.com.fintech.dao.BancoDAOImpl;
-import br.com.fintech.dao.CategoriaDAO;
-import br.com.fintech.dao.CategoriaDAOImpl;
 import br.com.fintech.entities.Banco;
-import br.com.fintech.entities.Categoria;
 
 
 import java.util.List;
@@ -13,10 +10,10 @@ import java.util.List;
 public class TesteBanco {
 
     public static void main(String[] args) {
-        getAllBancos();
-        editarBanco();
-        deletarBanco();
-        cadastrarBanco();
+    	cadastrarBanco();
+    	editarBanco();
+    	getAllBancos();
+    	//deletarBanco(); --- REVISAR
     }
 
     public static void cadastrarBanco() {
@@ -24,7 +21,6 @@ public class TesteBanco {
             BancoDAO bancoDAO = new BancoDAOImpl();
 
             Banco banco = new Banco();
-            banco.setId(4);
             banco.setCdBanco(237);
             banco.setNomeBanco("Bradesco");
             bancoDAO.insert(banco);
@@ -37,7 +33,7 @@ public class TesteBanco {
 
     public static void editarBanco() {
         try {
-            int idEdit = 3;
+            int idEdit = 46;
             BancoDAO bancoDAO = new BancoDAOImpl();
             Banco banco = new Banco();
 
@@ -52,7 +48,7 @@ public class TesteBanco {
 
     public static void deletarBanco() {
         try {
-            int idEdit = 10;
+            int idEdit = 47;
             BancoDAO bancoDAO = new BancoDAOImpl();
 
             bancoDAO.delete(idEdit);
@@ -67,7 +63,6 @@ public class TesteBanco {
             BancoDAO bancoDAO = new BancoDAOImpl();
 
             List<Banco> listbancos = bancoDAO.getAll();
-
 
             for (Banco banco : listbancos) {
                 System.out.println(banco.toString());

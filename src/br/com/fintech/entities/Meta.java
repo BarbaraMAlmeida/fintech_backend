@@ -1,24 +1,27 @@
 package br.com.fintech.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Meta extends Moeda implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int id;
     private String nomeMeta;
     private LocalDate dtFimMeta;
+    private Usuario usuario;
+    
     public Meta () {
-}
-    public Meta(int i, String string, Date date) {
-
+    	
     }
 
-    public Meta(int id, String nomeMeta, LocalDate dtFimMeta) {
-        this.id = id;
-        this.nomeMeta = nomeMeta;
-        this.dtFimMeta = dtFimMeta;
-    }
+    public Meta(int id, String nomeMeta, LocalDate dtFimMeta, Usuario usuario) {
+		super();
+		this.id = id;
+		this.nomeMeta = nomeMeta;
+		this.dtFimMeta = dtFimMeta;
+		this.usuario = usuario;
+	}
 
     public Meta( int id, String nomeMeta, LocalDate dtFimMeta, Double valor) {
         super(valor);
@@ -50,22 +53,18 @@ public class Meta extends Moeda implements Serializable {
     public void setDtFimMeta(LocalDate dtFimMeta) {
         this.dtFimMeta = dtFimMeta;
     }
+    
+    public Usuario getUsuario() {
+		return usuario;
+	}
+    
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
-    public void cadastrar() {
-        System.out.println("Meta " + this.nomeMeta + " cadastrada!");
-    }
-
-    public void editar(int id, Meta meta) {
-        System.out.println("Meta atualizada");
-    }
-
-    public void excluir(int id) {
-        System.out.println("Meta deletada");
-    }
-
-    public Meta listar() {
-        this.cadastrar();
-        return this;
-    }
-
+	@Override
+	public String toString() {
+		return "Meta [id = " + id + ", nomeMeta = " + nomeMeta + ", dtFimMeta = " + dtFimMeta + ", usuario = " + usuario + "]";
+	}
+	
 }

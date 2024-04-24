@@ -142,8 +142,8 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	            int rowCountResult = preparedStatement.executeUpdate();
 	            
 	            if(rowCountResult <= 0) {
-	            	throw new SQLException("Erro ao tentar editar o investimento. "
-	            			+ "Nenhum dado foi atualizado, verifique as informações e tente novamente.");
+	            	throw new SQLException("Erro ao tentar cadastrar o investimento. "
+	            			+ "Nenhum dado foi cadastrado, verifique as informações e tente novamente.");
 	            	
 	            } else {
 	            	  System.out.println(("O investimento foi cadastrado!!"));
