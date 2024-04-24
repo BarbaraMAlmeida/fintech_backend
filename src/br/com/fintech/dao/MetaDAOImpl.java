@@ -13,7 +13,7 @@ public class MetaDAOImpl implements MetaDAO {
     @Override
     public void insert(Meta meta) throws SQLException {
         String sql = "INSERT INTO T_META (id, nomeMeta, dtFimMeta) VALUES (?, ?, ?)";
-        try (Connection connection = FintechDB.getConnectionDB();
+        try (Connection connection = FintechDB.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, meta.getId());
@@ -32,7 +32,7 @@ public class MetaDAOImpl implements MetaDAO {
     @Override
     public Meta update(int id, Meta meta) throws SQLException {
         String sql = "UPDATE T_META SET nomeMeta = ?, dtFimMeta = ? WHERE CD_META = ?";
-        try (Connection connection = FintechDB.getConnectionDB();
+        try (Connection connection = FintechDB.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, meta.getNomeMeta());
@@ -52,7 +52,7 @@ public class MetaDAOImpl implements MetaDAO {
     @Override
     public void delete(int id) throws SQLException {
         String sql = "DELETE FROM T_META WHERE CD_META = ?";
-        try (Connection connection = FintechDB.getConnectionDB();
+        try (Connection connection = FintechDB.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, id);
@@ -70,7 +70,7 @@ public class MetaDAOImpl implements MetaDAO {
     public List<Meta> getAll() throws SQLException {
         List<Meta> listMetas = new ArrayList<>();
         String sql = "SELECT * FROM T_META";
-        try (Connection connection = FintechDB.getConnectionDB();
+        try (Connection connection = FintechDB.getInstance().getConnection();
              Statement statement = connection.createStatement();
              ResultSet result = statement.executeQuery(sql)) {
 

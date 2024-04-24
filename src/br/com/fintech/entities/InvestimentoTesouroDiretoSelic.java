@@ -51,21 +51,4 @@ public class InvestimentoTesouroDiretoSelic extends Investimento implements Seri
                 + "foi criado." );
     }
 
-    @Override
-    public void calcularInvestimento(double valorInvestido) {
-        Double total = getValor() * calcularRendimentoAnual();
-
-        this.setValorRetirado(total);
-    }
-
-
-    @Override
-    public void editar(int id, Investimento meta) {
-        System.out.println("Investimento atualizado");
-    }
-
-    @Override
-    public void excluir(int id) {
-        System.out.println("Investimento deletado");
-    }
 }

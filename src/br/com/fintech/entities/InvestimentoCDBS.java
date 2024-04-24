@@ -61,28 +61,11 @@ public class InvestimentoCDBS extends Investimento implements Serializable {
         return dias;
     }
 
-    @Override
-    public void calcularInvestimento(double valorInvestido) {
-        Double total = getValor() * (getTaxaCdi() * getPercentualCdi());
-
-        this.setValorRetirado(total);
-    }
-
+  
     public void cadastrar() {
         System.out.println("Investimento CDBS que possui vencimento em " + this.dtVencimento
                 + "foi criado." );
     }
-
-    @Override
-    public void editar(int id, Investimento meta) {
-        System.out.println("Investimento atualizado");
-    }
-
-    @Override
-    public void excluir(int id) {
-        System.out.println("Investimento deletado");
-    }
-
 
 
 }

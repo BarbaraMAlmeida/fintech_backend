@@ -5,7 +5,9 @@ import java.time.LocalDate;
 
 
 public abstract class Investimento extends Moeda implements Serializable {
-    private int id;
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
     private double valorRetirado;
     private LocalDate dtInvestimento;
     private Banco banco;
@@ -60,16 +62,15 @@ public abstract class Investimento extends Moeda implements Serializable {
     public void setBanco(Banco banco) {
         this.banco = banco;
     }
-
-    public void calcularInvestimento(double valorInvestido) {
+    
+    @Override
+    public String toString() {
+        return "Investimento [codigo = " + id
+                + ", banco = " + banco.getId()
+                + ", valor = " + getValor()
+                + ", data do investimento = " + dtInvestimento
+                + "]";
     }
 
-    public void editar(int id, Investimento meta) {
-        System.out.println("Investimento atualizado");
-    }
-
-    public void excluir(int id) {
-        System.out.println("Investimento deletado");
-    }
 
 }

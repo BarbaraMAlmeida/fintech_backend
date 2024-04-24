@@ -31,7 +31,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
     	sql = "INSERT INTO T_TRANSACAO (CD_TRANSACAO, CD_CATEGORIA, "
     			+ "CD_USUARIO, VAL_TRANSACAO, DT_LANCAMENTO, TIPO_TRANSACAO) VALUES (?,?,?,?,?,?)";
         try {
-            connection = FintechDB.getConnectionDB();
+            connection = FintechDB.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, transacao.getId());
@@ -59,7 +59,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 		sql = "UPDATE T_TRANSACAO SET CD_TRANSACAO = ?, CD_CATEGORIA = ?,VL_TRANSACAO  = ?, "
 				+ "DT_LANCAMENTO = ?, TIPO_TRANSACAO = ? WHERE CD_TRANSACAO = ?" ;
         try {
-            connection = FintechDB.getConnectionDB();
+            connection = FintechDB.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -94,7 +94,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 	public void delete(int id) throws SQLException {
 	        sql = "DELETE FROM T_TRANSACAO WHERE CD_TRANSACAO = ?";
 	        try {
-	            connection = FintechDB.getConnectionDB();
+	            connection = FintechDB.getInstance().getConnection();
 	            preparedStatement = connection.prepareStatement(
 	                    sql
 	            );
@@ -117,7 +117,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
         List<Transacao> listTransacao = new ArrayList<Transacao>();
         sql = "SELECT * FROM T_TRANSACAO";
         try {
-            connection = FintechDB.getConnectionDB();
+            connection = FintechDB.getInstance().getConnection();
             statement  = connection.createStatement();
 
             ResultSet result = statement.executeQuery(sql);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CategoriaDAOImpl implements CategoriaDAO {
 
-    private Connection connection;
+	private Connection connection;
     PreparedStatement preparedStatement = null;
     Statement statement = null;
 
@@ -15,14 +15,13 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
     @Override
     public void insert(Categoria categoria) throws SQLException {
-        sql = "INSERT INTO T_CATEGORIA VALUES (?,?,?)";
+        sql = "INSERT INTO T_CATEGORIA VALUES (SEQ_AUTOMATIC_T_CATEGORIA_PK.NEXTVAL, ? , ?)";
         try {
-            connection = FintechDB.getConnectionDB();
+        	connection = FintechDB.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, categoria.getId());
-            preparedStatement.setString(2, categoria.getNomeCategoria());
-            preparedStatement.setString(3, categoria.getDescricao());
+            preparedStatement.setString(1, categoria.getNomeCategoria());
+            preparedStatement.setString(2, categoria.getDescricao());
             preparedStatement.executeUpdate();
 
             System.out.println(("A categoria foi gravada!!"));
@@ -30,8 +29,6 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         } catch (SQLException e) {
             connection.rollback();
            throw new SQLException("Erro ao cadastrar categoria", e);
-        } finally {
-            connection.close();
         }
 
     }
@@ -40,7 +37,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     public Categoria update(int id, Categoria categoria) throws SQLException {
         sql = "UPDATE T_CATEGORIA SET NM_CATEGORIA = ? , DES_CATEGORIA = ? WHERE CD_CATEGORIA = ?";
         try {
-            connection = FintechDB.getConnectionDB();
+        	connection = FintechDB.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -48,17 +45,23 @@ public class CategoriaDAOImpl implements CategoriaDAO {
             preparedStatement.setString(1, categoria.getNomeCategoria());
             preparedStatement.setString(2, categoria.getDescricao());
             preparedStatement.setInt(3, id);
-            preparedStatement.executeUpdate();
-
-            System.out.println(("A categoria foi atualizada!!"));
-            connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
-            throw new SQLException("Erro ao editar categoria", e);
-        } finally {
-            connection.close();
+            int rowCountResult = preparedStatement.executeUpdate();
+            
+            if(rowCountResult <= 0) {
+            	throw new SQLException("Erro ao tentar editar o dado. "
+            			+ "Nenhum dado foi atualizado, verifique as informações e tente novamente.");
+            	
+            } else {
+            	  System.out.println(("A categoria foi atualizada!!"));
+                  connection.commit();
+            }
+          
         }
-
+        catch (Exception e) {
+        	connection.rollback();
+        	System.err.println(e);
+        }
+        
         return categoria;
 
     }
@@ -67,21 +70,26 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     public void delete(int id) throws SQLException {
         sql = "DELETE T_CATEGORIA WHERE CD_CATEGORIA = ?";
         try {
-            connection = FintechDB.getConnectionDB();
+        	connection = FintechDB.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(
                     sql
             );
 
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-            System.out.println(("A categoria foi deletada!!"));
-            connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
-            throw new SQLException("Erro ao excluir categoria", e);
-        } finally {
-            connection.close();
+            int rowCountResult = preparedStatement.executeUpdate();
+            
+            if(rowCountResult <= 0) {
+            	throw new SQLException("Erro ao tentar deletar o dado. "
+            			+ "Nenhum dado foi deletado, verifique as informações e tente novamente.");
+            	
+            } else {
+            	 System.out.println(("A categoria foi deletada!!"));
+                 connection.commit();
+            }
+           
+        } catch (Exception e) {
+        	connection.rollback();
+        	System.err.println(e);
         }
     }
 
@@ -90,7 +98,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         List<Categoria> listCategorias = new ArrayList<Categoria>();
         sql = "SELECT * FROM T_CATEGORIA";
         try {
-            connection = FintechDB.getConnectionDB();
+        	connection = FintechDB.getInstance().getConnection();
             statement  = connection.createStatement();
 
             ResultSet result = statement.executeQuery(sql);
@@ -106,8 +114,6 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         } catch (SQLException e) {
             connection.rollback();
             throw new SQLException("Erro ao cadastrar categoria", e);
-        } finally {
-            connection.close();
         }
 
         return listCategorias;

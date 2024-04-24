@@ -16,7 +16,7 @@ public class BancoDAOImpl implements BancoDAO {
     public void insert(Banco banco) throws SQLException {
         sql = "INSERT INTO T_BANCO VALUES (?,?,?)";
         try {
-            connection = FintechDB.getConnectionDB();
+            connection = FintechDB.getInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, banco.getId());
@@ -39,7 +39,7 @@ public class BancoDAOImpl implements BancoDAO {
     public Banco update(int id, Banco banco) throws SQLException {
         sql = "UPDATE T_BANCO SET NM_BANCO = ? , CD_BANCO = ? WHERE ID_BANCO = ?";
         try {
-            connection = FintechDB.getConnectionDB();
+            connection = FintechDB.getInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -66,7 +66,7 @@ public class BancoDAOImpl implements BancoDAO {
     public void delete(int id) throws SQLException {
         sql = "DELETE T_BANCO WHERE CD_BANCO = ?";
         try {
-            connection = FintechDB.getConnectionDB();
+            connection = FintechDB.getInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -89,7 +89,7 @@ public class BancoDAOImpl implements BancoDAO {
         List <Banco> listbancos = new ArrayList<Banco>();
         sql = "SELECT * FROM T_BANCO";
         try {
-            connection = FintechDB.getConnectionDB();
+            connection =  FintechDB.getInstance().getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){

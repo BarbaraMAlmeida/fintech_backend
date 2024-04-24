@@ -19,9 +19,8 @@ public class TesteCategoria {
             CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
             Categoria categoria = new Categoria();
-            categoria.setId(10);
-            categoria.setNomeCategoria("TRABALHO");
-            categoria.setDescricao("TRABALHO");
+            categoria.setNomeCategoria("bbbfffnn");
+            categoria.setDescricao("Salário Empresa X mensal");
             categoriaDAO.insert(categoria);
         }
         catch (Exception e) {
@@ -31,11 +30,11 @@ public class TesteCategoria {
 
     public static void editarCategoria() {
         try {
-            int idEdit = 10;
+            int idEdit = 26;
             CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
             Categoria categoria = new Categoria();
 
-            categoria.setNomeCategoria("Teste atualização de categoria");
+            categoria.setNomeCategoria("Teste atualizaçãoasdsasad de categoriass");
             categoria.setDescricao("Teste atualização");
             categoriaDAO.update(idEdit, categoria);
         }
@@ -46,7 +45,7 @@ public class TesteCategoria {
 
     public static void deletarCategoria() {
         try {
-            int idEdit = 10;
+            int idEdit = 44;
             CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
             categoriaDAO.delete(idEdit);
