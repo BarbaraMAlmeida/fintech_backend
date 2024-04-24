@@ -49,7 +49,7 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	            			+ "Nenhum dado foi atualizado, verifique as informações e tente novamente.");
 	            	
 	            } else {
-	            	  System.out.println(("O investimento foi atualizada!!"));
+	            	  System.out.println(("O investimento foi atualizado!!"));
 	                  connection.commit();
 	            }
 	          
@@ -76,7 +76,7 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
             			+ "Nenhum dado foi deletado, verifique as informações e tente novamente.");
             	
             } else {
-            	 System.out.println(("O investimento foi deletada!!"));
+            	 System.out.println(("O investimento foi deletado!!"));
                  connection.commit();
             }
            
@@ -120,7 +120,41 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 
 	@Override
 	public void insert(Investimento investimento) throws SQLException {
-		// TODO Auto-generated method stub
+		 sql = "INSERT INTO T_INVESTIMENTO VALUES (CD_INVESTIMENTO = ? , "
+		 		+ "ID_BANCO = ?, CD_TIPO_INVESTIMENTO = ?, CD_USUARIO = ?,"
+		 		+ "VAL_INVESTIDO = ?, VAL_RETIRADO = ?, DT_INVESTIMENTO = ?, DT_VENCIMENTO = ?)";
+	        try {
+	        	connection = FintechDB.getInstance().getConnection();
+	            preparedStatement = connection.prepareStatement(sql);
+
+	            preparedStatement.setInt(1, investimento.getId());
+	            preparedStatement.setInt(2, investimento.getBanco().getId());
+	            preparedStatement.setInt(3, investimento.getTipoInvestimento().getCdTipoInvestimento());
+	            preparedStatement.setInt(4, investimento.getUsuario().getId());
+	            preparedStatement.setDouble(5, investimento.getValor());
+	            preparedStatement.setDouble(6, investimento.getValorRetirado());
+	            Date dateDtInvestimento = Date.valueOf(investimento.getDtInvestimento());
+	            preparedStatement.setDate(7, dateDtInvestimento);
+	            Date dateDtVencimento = Date.valueOf(investimento.getDtVencimento());
+	            preparedStatement.setDate(8, dateDtVencimento);
+
+	            
+	            int rowCountResult = preparedStatement.executeUpdate();
+	            
+	            if(rowCountResult <= 0) {
+	            	throw new SQLException("Erro ao tentar editar o investimento. "
+	            			+ "Nenhum dado foi atualizado, verifique as informações e tente novamente.");
+	            	
+	            } else {
+	            	  System.out.println(("O investimento foi cadastrado!!"));
+	                  connection.commit();
+	            }
+	          
+	        }
+	        catch (Exception e) {
+	        	connection.rollback();
+	        	System.err.println(e);
+	        }
 		
 	}
 

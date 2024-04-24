@@ -11,15 +11,41 @@ import br.com.fintech.entities.Banco;
 import br.com.fintech.entities.Categoria;
 import br.com.fintech.entities.Investimento;
 import br.com.fintech.entities.InvestimentoCDBS;
+import br.com.fintech.entities.Usuario;
+import br.com.fintech.enums.TipoInvestimento;
 
 public class TesteInvestimento {
 
 	 public static void main(String[] args) {
-	        editarInvestimento();
-	        deletarInvestimento();
+		 	//cadastrarInvestimento();
+	        //editarInvestimento();
+	        //deletarInvestimento();
 	        getAllInvestimentos();
 	    }
 
+	 public static void cadastrarInvestimento() {
+	        try {
+	            InvestimentoDAO investimentoDAO = new InvestimentoDAOImpl();
+
+	            Investimento investimento = new InvestimentoCDBS();
+	            investimento.setId(67);
+	            Banco banco = new Banco();
+	            banco.setId(21);
+	            investimento.setBanco(banco);
+	            investimento.setTipoInvestimento(TipoInvestimento.CDBS);
+	            Usuario usuario = new Usuario();
+	            usuario.setId(16);
+	            investimento.setUsuario(usuario);
+	            investimento.setValor(3000.0);
+	            investimento.setValorRetirado(13000.0);
+	            investimento.setDtInvestimento(LocalDate.now());
+	            investimento.setDtVencimento(LocalDate.of(2026, 8, 10));
+	            investimentoDAO.insert(investimento);
+	        }
+	        catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	    public static void editarInvestimento() {
 	        try {

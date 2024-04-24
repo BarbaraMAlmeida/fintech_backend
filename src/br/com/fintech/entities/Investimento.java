@@ -3,6 +3,8 @@ package br.com.fintech.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import br.com.fintech.enums.TipoInvestimento;
+
 
 public abstract class Investimento extends Moeda implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -11,10 +13,40 @@ public abstract class Investimento extends Moeda implements Serializable {
     private double valorRetirado;
     private LocalDate dtInvestimento;
     private Banco banco;
+    private Usuario usuario;
+    private LocalDate dtVencimento;
+    private TipoInvestimento tipoInvestimento;
 
-    public Investimento() {
+
+
+
+	public Investimento() {
 
     }
+	
+	public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, Usuario usuario,
+			LocalDate dtVencimento, TipoInvestimento tipoInvestimento) {
+		super();
+		this.id = id;
+		this.valorRetirado = valorRetirado;
+		this.dtInvestimento = dtInvestimento;
+		this.banco = banco;
+		this.usuario = usuario;
+		this.dtVencimento = dtVencimento;
+		this.tipoInvestimento = tipoInvestimento;
+	}
+
+	
+	public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, Usuario usuario, LocalDate dtVencimento) {
+		super();
+		this.id = id;
+		this.valorRetirado = valorRetirado;
+		this.dtInvestimento = dtInvestimento;
+		this.banco = banco;
+		this.usuario = usuario;
+		this.dtVencimento = dtVencimento;
+	}
+
 
     public Investimento(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco) {
         this.id = id;
@@ -63,6 +95,31 @@ public abstract class Investimento extends Moeda implements Serializable {
         this.banco = banco;
     }
     
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	public LocalDate getDtVencimento() {
+		return dtVencimento;
+	}
+
+	public void setDtVencimento(LocalDate dtVencimento) {
+		this.dtVencimento = dtVencimento;
+	}
+	
+	public TipoInvestimento getTipoInvestimento() {
+		return tipoInvestimento;
+	}
+
+	public void setTipoInvestimento(TipoInvestimento tipoInvestimento) {
+		this.tipoInvestimento = tipoInvestimento;
+	}
+
+    
     @Override
     public String toString() {
         return "Investimento [codigo = " + id
@@ -71,6 +128,8 @@ public abstract class Investimento extends Moeda implements Serializable {
                 + ", data do investimento = " + dtInvestimento
                 + "]";
     }
+    
+    
 
 
 }
