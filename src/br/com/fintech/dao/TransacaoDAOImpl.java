@@ -29,12 +29,11 @@ public class TransacaoDAOImpl implements TransacaoDAO {
     public void insert(Transacao transacao) throws SQLException {
     	  
     	sql = "INSERT INTO T_TRANSACAO (CD_TRANSACAO, CD_CATEGORIA, "
-    			+ "CD_USUARIO, VAL_TRANSACAO, DT_LANCAMENTO, TIPO_TRANSACAO) VALUES (?,?,?,?,?,?)";
+    			+ "CD_USUARIO, VAL_TRANSACAO, DT_LANCAMENTO, TIPO_TRANSACAO) VALUES (SEQ_AUTOMATIC_T_TRANSACAO_PK.NEXTVAL,?,?,?,?,?)";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, transacao.getId());
             preparedStatement.setInt(2, transacao.getCategoria().getId());
             preparedStatement.setInt(3,transacao.getUsuario().getId());
             preparedStatement.setDouble(4, 2200);
@@ -59,7 +58,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 		sql = "UPDATE T_TRANSACAO SET CD_TRANSACAO = ?, CD_CATEGORIA = ?,VL_TRANSACAO  = ?, "
 				+ "DT_LANCAMENTO = ?, TIPO_TRANSACAO = ? WHERE CD_TRANSACAO = ?" ;
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -94,7 +93,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 	public void delete(int id) throws SQLException {
 	        sql = "DELETE FROM T_TRANSACAO WHERE CD_TRANSACAO = ?";
 	        try {
-	            connection = FintechDB.getInstance().getConnection();
+	        	connection = FintechDB.getConnectionDB();
 	            preparedStatement = connection.prepareStatement(
 	                    sql
 	            );
@@ -117,11 +116,11 @@ public class TransacaoDAOImpl implements TransacaoDAO {
         List<Transacao> listTransacao = new ArrayList<Transacao>();
         sql = "SELECT * FROM T_TRANSACAO";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             statement  = connection.createStatement();
 
             ResultSet result = statement.executeQuery(sql);
-            LocalDate date;
+            
             while (result.next()) {
             	Usuario usuario = new Usuario();
             	usuario.setId(result.getInt("CD_USUARIO"));

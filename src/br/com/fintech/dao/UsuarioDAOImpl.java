@@ -1,6 +1,5 @@
 package br.com.fintech.dao;
 import br.com.fintech.connection.FintechDB;
-import br.com.fintech.entities.Categoria;
 import br.com.fintech.entities.Genero;
 import br.com.fintech.entities.Usuario;
 import java.sql.*;
@@ -9,7 +8,6 @@ import java.util.List;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
-    private static final Usuario Usuario = null;
 	private Connection connection;
     PreparedStatement preparedStatement = null;
     Statement statement = null;
@@ -19,17 +17,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     
     @Override
     public void insert(Usuario Usuario) throws SQLException {
-        sql = "INSERT INTO T_USUARIO VALUES (?,?,?)";
+        sql = "INSERT INTO T_USUARIO VALUES (SEQ_AUTOMATIC_T_USUARIO_PK.NEXTVAL,?,?,?,?,?)";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, Usuario.getId());
-            preparedStatement.setString(2, Usuario.getNomeUsuario());
+            preparedStatement.setString(1, Usuario.getNomeUsuario());
+            preparedStatement.setInt(2, Usuario.getGenero().getId());
             Date date = Date.valueOf(Usuario.getDtNascimento());
             preparedStatement.setDate(3, date);
-            preparedStatement.setInt(4, Usuario.getGenero().getId());
-            preparedStatement.setString(5, Usuario.getEmail());
-            preparedStatement.setString(6, Usuario.getSenha());
+            preparedStatement.setString(4, Usuario.getEmail());
+            preparedStatement.setString(5, Usuario.getSenha());
             preparedStatement.executeUpdate();
 
             System.out.println(("O usuário foi gravado!!"));
@@ -47,7 +44,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public Usuario update(int id, Usuario Usuario) throws SQLException {
         sql = "UPDATE T_USUARIO SET CD_USUARIO = ? , NM_USUARIO = ?, CD_GENERO = ?, DT_NASCIMENTO = ?, EMAIL = ?, SENHA = ? WHERE CD_USUARIO = ?";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -78,7 +75,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public void delete(int id) throws SQLException {
         sql = "DELETE T_USUARIO WHERE CD_USUARIO = ?";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -101,7 +98,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         List<Usuario> listUsuario = new ArrayList<Usuario>();
         sql = "SELECT * FROM T_USUARIO";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             statement  = connection.createStatement();
 
             ResultSet result = statement.executeQuery(sql);

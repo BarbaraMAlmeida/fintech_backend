@@ -1,12 +1,7 @@
 package br.com.fintech;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
-import br.com.fintech.connection.FintechDB;
-import br.com.fintech.dao.CategoriaDAO;
-import br.com.fintech.dao.CategoriaDAOImpl;
 import br.com.fintech.dao.TransacaoDAO;
 import br.com.fintech.dao.TransacaoDAOImpl;
 import br.com.fintech.entities.Categoria;
@@ -17,6 +12,9 @@ import br.com.fintech.enums.TipoTransacao;
 public class TesteTransacao {
 	public static void main(String[] args) {
         cadastrarTransacao();
+        editarTransacao();
+        deletarTransacao();
+        getAllTransacao();
     }
 
     public static void cadastrarTransacao() {
@@ -75,7 +73,7 @@ public class TesteTransacao {
         }
     }
 
-    public static void getAllCategorias() {
+    public static void getAllTransacao() {
         try {
             TransacaoDAO TransacaoDAO = new TransacaoDAOImpl();
 

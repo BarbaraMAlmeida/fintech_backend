@@ -17,7 +17,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     public void insert(Categoria categoria) throws SQLException {
         sql = "INSERT INTO T_CATEGORIA VALUES (SEQ_AUTOMATIC_T_CATEGORIA_PK.NEXTVAL, ? , ?)";
         try {
-        	connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, categoria.getNomeCategoria());
@@ -37,7 +37,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     public Categoria update(int id, Categoria categoria) throws SQLException {
         sql = "UPDATE T_CATEGORIA SET NM_CATEGORIA = ? , DES_CATEGORIA = ? WHERE CD_CATEGORIA = ?";
         try {
-        	connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
+
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -70,7 +71,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     public void delete(int id) throws SQLException {
         sql = "DELETE T_CATEGORIA WHERE CD_CATEGORIA = ?";
         try {
-        	connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
+
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -98,7 +100,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         List<Categoria> listCategorias = new ArrayList<Categoria>();
         sql = "SELECT * FROM T_CATEGORIA";
         try {
-        	connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
+
             statement  = connection.createStatement();
 
             ResultSet result = statement.executeQuery(sql);

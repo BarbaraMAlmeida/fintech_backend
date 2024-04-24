@@ -17,7 +17,7 @@ public class BancoDAOImpl implements BancoDAO {
     public void insert(Banco banco) throws SQLException {
         sql = "INSERT INTO T_BANCO VALUES (SEQ_AUTOMATIC_T_BANCO_PK.NEXTVAL,?,?)";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, banco.getCdBanco());
@@ -30,7 +30,9 @@ public class BancoDAOImpl implements BancoDAO {
         } catch (SQLException e) {
             connection.rollback();
             throw new SQLException("Erro ao cadastrar Banco", e);
-        } 
+        }   finally {
+        	connection.close();
+        }
 
 
     }
@@ -39,7 +41,7 @@ public class BancoDAOImpl implements BancoDAO {
     public Banco update(int id, Banco banco) throws SQLException {
         sql = "UPDATE T_BANCO SET NM_BANCO = ? , CD_BANCO = ? WHERE ID_BANCO = ?";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -56,7 +58,9 @@ public class BancoDAOImpl implements BancoDAO {
             connection.rollback();
             throw new SQLException("Erro ao editar banco", e);
         }
-
+        finally {
+        	connection.close();
+        }
 
         return banco;
 
@@ -66,7 +70,7 @@ public class BancoDAOImpl implements BancoDAO {
     public void delete(int id) throws SQLException {
         sql = "DELETE T_BANCO WHERE ID_BANCO = ?";
         try {
-            connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
                     sql
             );
@@ -89,6 +93,9 @@ public class BancoDAOImpl implements BancoDAO {
             throw new SQLException("Erro ao excluir banco", e);
             
         } 
+        finally {
+        	connection.close();
+        }
     }
 
     @Override
@@ -96,7 +103,7 @@ public class BancoDAOImpl implements BancoDAO {
         List<Banco> listbancos = new ArrayList<Banco>();
         sql = "SELECT * FROM T_BANCO";
         try {
-            connection =  FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             
@@ -113,6 +120,9 @@ public class BancoDAOImpl implements BancoDAO {
         } catch (SQLException e) {
             throw new SQLException("Não foi possivel encontrar dados em Bancos", e);
             
+        }
+        finally {
+        	connection.close();
         }
 
         

@@ -19,7 +19,6 @@ public class TesteMeta {
             MetaDAO metaDAO = new MetaDAOImpl();
 
             Meta meta = new Meta();
-            meta.setId(1);
             meta.setNomeMeta("Meta 1");
             meta.setDtFimMeta(LocalDate.of(2024, 4, 30));
             metaDAO.insert(meta);

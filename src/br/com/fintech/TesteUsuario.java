@@ -10,12 +10,12 @@ import java.util.List;
 
 public class TesteUsuario {
 	public static void main(String[] args) {
-        loginUsuario();
+		insertUsuario();
         deletarUsuario();
         getAllUsuarios();
 	}
 	
-	public static void loginUsuario() {
+	public static void insertUsuario() {
         try {
             UsuarioDAO UsuarioDAO = new UsuarioDAOImpl();
 

@@ -32,7 +32,7 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	public Investimento update(int id, Investimento investimento) throws SQLException {
 		 sql = "UPDATE T_INVESTIMENTO SET ID_BANCO = ? , VAL_INVESTIDO = ?, VAL_RETIRADO = ?, DT_VENCIMENTO = ? WHERE CD_INVESTIMENTO = ?";
 	        try {
-	        	connection = FintechDB.getInstance().getConnection();
+	        	connection = FintechDB.getConnectionDB();
 	            preparedStatement = connection.prepareStatement(sql);
 
 	            preparedStatement.setInt(1, investimento.getBanco().getId());
@@ -67,7 +67,7 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	public void delete(int id) throws SQLException {
 		sql = "DELETE T_INVESTIMENTO WHERE CD_INVESTIMENTO = ?";
         try {
-        	connection = FintechDB.getInstance().getConnection();
+        	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             int rowCountResult = preparedStatement.executeUpdate();
@@ -92,7 +92,7 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	        List<Investimento> listInvestimentos = new ArrayList<Investimento>();
 	        sql = "SELECT * FROM T_INVESTIMENTO";
 	        try {
-	        	connection = FintechDB.getInstance().getConnection();
+	        	connection = FintechDB.getConnectionDB();
 	            statement  = connection.createStatement();
 
 	            ResultSet result = statement.executeQuery(sql);
@@ -124,7 +124,7 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 		 		+ "ID_BANCO = ?, CD_TIPO_INVESTIMENTO = ?, CD_USUARIO = ?,"
 		 		+ "VAL_INVESTIDO = ?, VAL_RETIRADO = ?, DT_INVESTIMENTO = ?, DT_VENCIMENTO = ?)";
 	        try {
-	        	connection = FintechDB.getInstance().getConnection();
+	        	connection = FintechDB.getConnectionDB();
 	            preparedStatement = connection.prepareStatement(sql);
 
 	            preparedStatement.setInt(1, investimento.getId());
