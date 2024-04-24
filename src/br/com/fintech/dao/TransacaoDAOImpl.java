@@ -6,11 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-
 import br.com.fintech.connection.FintechDB;
 import br.com.fintech.entities.Categoria;
 import br.com.fintech.entities.Transacao;
@@ -34,13 +31,12 @@ public class TransacaoDAOImpl implements TransacaoDAO {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(2, transacao.getCategoria().getId());
-            preparedStatement.setInt(3,transacao.getUsuario().getId());
-            preparedStatement.setDouble(4, 2200);
+            preparedStatement.setInt(1, transacao.getCategoria().getId());
+            preparedStatement.setInt(2,transacao.getUsuario().getId());
+            preparedStatement.setDouble(3, 2200);
             Date date = Date.valueOf(transacao.getDtLancamento());
-            preparedStatement.setDate(5, date);
-            System.out.println(transacao.getTipoTransacao());
-            preparedStatement.setString(6, transacao.getTipoTransacao().name());
+            preparedStatement.setDate(4, date);
+            preparedStatement.setString(5, transacao.getTipoTransacao().name());
             preparedStatement.executeUpdate();
 
             System.out.println(("A Transação foi efetivada!!"));
@@ -55,7 +51,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 
 	@Override
 	public Transacao update(int id, Transacao transacao) throws SQLException {
-		sql = "UPDATE T_TRANSACAO SET CD_TRANSACAO = ?, CD_CATEGORIA = ?,VL_TRANSACAO  = ?, "
+		sql = "UPDATE T_TRANSACAO SET CD_TRANSACAO = ?, CD_CATEGORIA = ?,VAL_TRANSACAO  = ?, "
 				+ "DT_LANCAMENTO = ?, TIPO_TRANSACAO = ? WHERE CD_TRANSACAO = ?" ;
         try {
         	connection = FintechDB.getConnectionDB();
@@ -68,8 +64,6 @@ public class TransacaoDAOImpl implements TransacaoDAO {
             preparedStatement.setDouble(3, 2200);
             Date date = Date.valueOf(transacao.getDtLancamento());
             preparedStatement.setDate(4, date);
-            
-            System.out.println(transacao.getTipoTransacao());
             preparedStatement.setString(5, transacao.getTipoTransacao().name());
             preparedStatement.setInt(6,id);
             
@@ -118,10 +112,10 @@ public class TransacaoDAOImpl implements TransacaoDAO {
         try {
         	connection = FintechDB.getConnectionDB();
             statement  = connection.createStatement();
-
             ResultSet result = statement.executeQuery(sql);
             
             while (result.next()) {
+            	System.out.println(result);
             	Usuario usuario = new Usuario();
             	usuario.setId(result.getInt("CD_USUARIO"));
             	Categoria categoria = new Categoria();
@@ -129,7 +123,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
             	TipoTransacao tipoTransacao = TipoTransacao.valueOf(result.getString("TIPO_TRANSACAO"));
             	Transacao transacao = new Transacao(result.getInt("CD_TRANSACAO"), result.getDouble("VAL_TRANSACAO"), 
             			usuario, result.getDate("DT_LANCAMENTO").toLocalDate(), tipoTransacao, categoria);
-
+          
                 listTransacao.add(transacao);
             }
 
@@ -140,7 +134,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
         } finally {
             connection.close();
         }
-
+        System.out.println(listTransacao);
         return listTransacao;
     }
 	}

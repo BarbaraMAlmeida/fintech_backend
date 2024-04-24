@@ -23,9 +23,7 @@ public class MetaDAOImpl implements MetaDAO {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, meta.getNomeMeta());
-            Usuario usuario = new Usuario();
-        	usuario.setId(26);
-            preparedStatement.setInt(2, usuario.getId());
+            preparedStatement.setInt(2, meta.getUsuario().getId());
             preparedStatement.setDouble(3, meta.getValor());
             Date date = Date.valueOf(meta.getDtFimMeta());
             preparedStatement.setDate(4, date);
@@ -42,7 +40,7 @@ public class MetaDAOImpl implements MetaDAO {
 
     @Override
     public Meta update(int id, Meta meta) throws SQLException {
-        String sql = "UPDATE T_META SET nomeMeta = ?, dtFimMeta = ? WHERE CD_META = ?";
+        String sql = "UPDATE T_META SET NM_META = ?, DT_FIM_META = ? WHERE CD_META = ?";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
