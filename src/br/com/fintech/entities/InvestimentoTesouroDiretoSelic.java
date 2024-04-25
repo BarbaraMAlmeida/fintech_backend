@@ -7,19 +7,16 @@ public class InvestimentoTesouroDiretoSelic extends Investimento implements Seri
 	private static final long serialVersionUID = 1L;
 	
     private double taxaSelicAnual;
-    private LocalDate dtVencimento;
 
     public InvestimentoTesouroDiretoSelic() {}
 
-    public InvestimentoTesouroDiretoSelic(double taxaSelicAnual, LocalDate dtVencimento) {
+    public InvestimentoTesouroDiretoSelic(double taxaSelicAnual) {
         this.taxaSelicAnual = taxaSelicAnual;
-        this.dtVencimento = dtVencimento;
     }
 
-    public InvestimentoTesouroDiretoSelic(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, double taxaSelicAnual, LocalDate dtVencimento) {
+    public InvestimentoTesouroDiretoSelic(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, double taxaSelicAnual) {
         super(id, valorRetirado, dtInvestimento, banco);
         this.taxaSelicAnual = taxaSelicAnual;
-        this.dtVencimento = dtVencimento;
     }
 
     public double getTaxaSelicAnual() {
@@ -30,13 +27,6 @@ public class InvestimentoTesouroDiretoSelic extends Investimento implements Seri
         this.taxaSelicAnual = taxaSelicAnual;
     }
 
-    public LocalDate getDtVencimento() {
-        return dtVencimento;
-    }
-
-    public void setDtVencimento(LocalDate dtVencimento) {
-        this.dtVencimento = dtVencimento;
-    }
 
     public Double calcularRendimentoDiario() {
        return getValor() * (this.taxaSelicAnual / 100) / 252;
@@ -49,8 +39,7 @@ public class InvestimentoTesouroDiretoSelic extends Investimento implements Seri
     }
 
     public void cadastrar() {
-        System.out.println("Investimento Tesouro Direto Selic que possui vencimento em " + this.dtVencimento
-                + "foi criado." );
+        System.out.println("Investimento Tesouro Direto Selic que possui foi criado." );
     }
 
 }

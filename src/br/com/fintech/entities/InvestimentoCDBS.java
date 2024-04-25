@@ -8,30 +8,27 @@ public class InvestimentoCDBS extends Investimento implements Serializable {
 	
     private double taxaCdi;
     private double percentualCdi;
-    private LocalDate dtVencimento;
 
     public InvestimentoCDBS() {
 
     }
 
-    public InvestimentoCDBS(double taxaCdi, double percentualCdi, LocalDate dtVencimento) {
+    public InvestimentoCDBS(double taxaCdi, double percentualCdi) {
         this.taxaCdi = taxaCdi;
         this.percentualCdi = percentualCdi;
-        this.dtVencimento = dtVencimento;
     }
 
-    public InvestimentoCDBS(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, double taxaCdi, double percentualCdi, LocalDate dtVencimento) {
+    public InvestimentoCDBS(int id, double valorRetirado, LocalDate dtInvestimento, Banco banco, double taxaCdi, double percentualCdi) {
         super(id, valorRetirado, dtInvestimento, banco);
         this.taxaCdi = taxaCdi;
         this.percentualCdi = percentualCdi;
-        this.dtVencimento = dtVencimento;
     }
 
-    public InvestimentoCDBS(int id, Double valor, double valorRetirado, LocalDate dtInvestimento, Banco banco, double taxaCdi, double percentualCdi, LocalDate dtVencimento) {
+    public InvestimentoCDBS(int id, Double valor, double valorRetirado, LocalDate dtInvestimento, Banco banco, double taxaCdi, double percentualCdi) {
         super(valor, id, valorRetirado, dtInvestimento, banco);
         this.taxaCdi = taxaCdi;
         this.percentualCdi = percentualCdi;
-        this.dtVencimento = dtVencimento;
+
     }
 
     public double getTaxaCdi() {
@@ -50,14 +47,6 @@ public class InvestimentoCDBS extends Investimento implements Serializable {
         this.percentualCdi = percentualCdi;
     }
 
-    public LocalDate getDtVencimento() {
-        return dtVencimento;
-    }
-
-    public void setDtVencimento(LocalDate dtVencimento) {
-        this.dtVencimento = dtVencimento;
-    }
-
     public Integer calcularDiasInvestimento() {
         Integer dias =  getDtVencimento().getDayOfMonth() - getDtInvestimento().getDayOfMonth();
         return dias;
@@ -65,8 +54,7 @@ public class InvestimentoCDBS extends Investimento implements Serializable {
 
   
     public void cadastrar() {
-        System.out.println("Investimento CDBS que possui vencimento em " + this.dtVencimento
-                + "foi criado." );
+        System.out.println("Investimento CDBS foi criado." );
     }
 
 

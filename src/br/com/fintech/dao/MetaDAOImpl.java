@@ -36,6 +36,8 @@ public class MetaDAOImpl implements MetaDAO {
         } catch (SQLException e) {
             System.err.println("Erro ao cadastrar meta: " + e.getMessage());
             throw new SQLException("Erro ao cadastrar meta", e);
+        }finally {
+        	connection.close();
         }
     }
 
@@ -62,6 +64,8 @@ public class MetaDAOImpl implements MetaDAO {
         } catch (SQLException e) {
             System.err.println("Erro ao editar meta: " + e.getMessage());
             throw new SQLException("Erro ao editar meta", e);
+        }finally {
+        	connection.close();
         }
         return meta;
     }
@@ -87,6 +91,8 @@ public class MetaDAOImpl implements MetaDAO {
         } catch (SQLException e) {
             System.err.println("Erro ao excluir meta: " + e.getMessage());
             throw new SQLException("Erro ao excluir meta", e);
+        }finally {
+        	connection.close();
         }
     }
 
@@ -109,11 +115,14 @@ public class MetaDAOImpl implements MetaDAO {
                 meta.setValor(result.getDouble("val_meta"));
                 meta.setDtFimMeta(result.getDate("dt_fim_meta").toLocalDate());
                 listMetas.add(meta);
+               
             }
             connection.commit();
         } catch (SQLException e) {
             System.err.println("Erro ao buscar metas: " + e.getMessage());
             throw new SQLException("Erro ao buscar metas", e);
+        }finally {
+        	connection.close();
         }
         return listMetas;
     }

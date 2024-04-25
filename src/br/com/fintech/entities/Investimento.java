@@ -108,15 +108,13 @@ public abstract class Investimento extends Moeda implements Serializable {
 
     
     @Override
-    public String toString() {
-        return "Investimento [codigo = " + id
-                + ", banco = " + banco.getId()
-                + ", valor = " + getValor()
-                + ", data do investimento = " + dtInvestimento
-                + ", usuario vinculado = " + usuario.getNomeUsuario()
-                + ", tipo do investimento = " + tipoInvestimento
-                + "]";
-    }
+	public String toString() {
+		return "Investimento [id=" + id + ", valorRetirado=" + valorRetirado + ", dtInvestimento=" + dtInvestimento
+				+ ", banco=" + banco.getId() + ", usuario=" + usuario.getId() + ", dtVencimento=" + dtVencimento + ", tipoInvestimento="
+				+ tipoInvestimento.getCdTipoInvestimento() + "]";
+	}
+    
+    
     
     
 

@@ -13,6 +13,7 @@ import br.com.fintech.entities.Banco;
 import br.com.fintech.entities.Investimento;
 import br.com.fintech.entities.InvestimentoCDBS;
 import br.com.fintech.entities.Usuario;
+import br.com.fintech.enums.TipoInvestimento;
 
 public class InvestimentoDAOImpl implements InvestimentoDAO {
 
@@ -61,6 +62,8 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	        catch (Exception e) {
 	        	connection.rollback();
 	        	System.err.println(e);
+	        }finally {
+	        	connection.close();
 	        }
 		
 	}
@@ -94,7 +97,10 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	        catch (Exception e) {
 	        	connection.rollback();
 	        	System.err.println(e);
+	        }finally {
+	        	connection.close();
 	        }
+	        
 	        return investimento;	
 	 }
 	
@@ -120,6 +126,8 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
         } catch (Exception e) {
         	connection.rollback();
         	System.err.println(e);
+        }finally {
+        	connection.close();
         }
 		
 	}
@@ -144,8 +152,12 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	                Usuario usuario = new Usuario();
 	                usuario.setId(result.getInt("cd_usuario"));
 	                investimento.setUsuario(usuario);
+	                int cdTipoInvestimento = result.getInt("cd_tipo_investimento");
+	                investimento.setTipoInvestimento(TipoInvestimento.fromCdTipoInvestimento(cdTipoInvestimento));
+	                investimento.setDtInvestimento(result.getDate("dt_investimento").toLocalDate());
+	                investimento.setDtVencimento(result.getDate("dt_vencimento").toLocalDate());
 	                investimento.setValorRetirado(result.getDouble("val_retirado"));
-	                investimento.setValor(result.getDouble("val_investido"));	
+	                investimento.setValor(result.getDouble("val_investido"));
 	                listInvestimentos.add(investimento);
 	            }
 	          
@@ -153,6 +165,8 @@ public class InvestimentoDAOImpl implements InvestimentoDAO {
 	        } catch (SQLException e) {
 	            connection.rollback();
 	            throw new SQLException("Erro ao listar investimentos", e);
+	        }finally {
+	        	connection.close();
 	        }
 
 	        return listInvestimentos;

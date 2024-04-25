@@ -89,7 +89,7 @@ public class Transacao extends Moeda implements Serializable {
 	@Override
 	public String toString() {
 		return "Transacao [id =" + id + ", valTransacao =" + valTransacao + ", dtLancamento =" + dtLancamento
-				+ ", tipoTransacao =" + tipoTransacao + ", categoria =" + categoria + ", usuario =" + usuario + "]";
+				+ ", tipoTransacao =" + tipoTransacao + ", categoria =" + categoria.getId() + ", usuario =" + usuario.getId() + "]";
 	}
     
   

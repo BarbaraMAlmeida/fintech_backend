@@ -64,7 +64,7 @@ public class Meta extends Moeda implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Meta [id = " + id + ", nomeMeta = " + nomeMeta + ", dtFimMeta = " + dtFimMeta + ", usuario = " + usuario + "]";
+		return "Meta [id = " + id + ", nomeMeta = " + nomeMeta + ", dtFimMeta = " + dtFimMeta + ", usuario = " + usuario.getId() + "]";
 	}
 	
 }
