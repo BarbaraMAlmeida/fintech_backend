@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,21 +27,21 @@ public class TransacaoDAOImpl implements TransacaoDAO {
     public void insert(Transacao transacao) throws SQLException {
     	  
     	sql = "INSERT INTO T_TRANSACAO (CD_TRANSACAO, CD_CATEGORIA, "
-    			+ "CD_USUARIO, VAL_TRANSACAO, DT_LANCAMENTO, TIPO_TRANSACAO) VALUES (SEQ_AUTOMATIC_T_TRANSACAO_PK.NEXTVAL,?,?,?,?,?)";
+    			+ "CD_USUARIO, VAL_TRANSACAO, DT_LANCAMENTO, TIPO_TRANSACAO) VALUES (?,?,?,?,?,?)";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
 
+            preparedStatement.setInt(1, transacao.getId());
             preparedStatement.setInt(2, transacao.getCategoria().getId());
             preparedStatement.setInt(3,transacao.getUsuario().getId());
             preparedStatement.setDouble(4, 2200);
             Date date = Date.valueOf(transacao.getDtLancamento());
             preparedStatement.setDate(5, date);
-            System.out.println(transacao.getTipoTransacao());
             preparedStatement.setString(6, transacao.getTipoTransacao().name());
             preparedStatement.executeUpdate();
 
-            System.out.println(("A Transação foi efetivada!!"));
+            System.out.println(("A Transação foi cadastrada!!"));
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
@@ -55,7 +53,7 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 
 	@Override
 	public Transacao update(int id, Transacao transacao) throws SQLException {
-		sql = "UPDATE T_TRANSACAO SET CD_TRANSACAO = ?, CD_CATEGORIA = ?,VL_TRANSACAO  = ?, "
+		sql = "UPDATE T_TRANSACAO SET CD_CATEGORIA = ?,VAL_TRANSACAO  = ?, "
 				+ "DT_LANCAMENTO = ?, TIPO_TRANSACAO = ? WHERE CD_TRANSACAO = ?" ;
         try {
         	connection = FintechDB.getConnectionDB();
@@ -63,24 +61,29 @@ public class TransacaoDAOImpl implements TransacaoDAO {
                     sql
             );
 
-            preparedStatement.setInt(1, transacao.getId());
-            preparedStatement.setInt(2, transacao.getCategoria().getId());
-            preparedStatement.setDouble(3, 2200);
+    
+            preparedStatement.setInt(1, transacao.getCategoria().getId());
+            preparedStatement.setDouble(2, transacao.getValTransacao());
             Date date = Date.valueOf(transacao.getDtLancamento());
-            preparedStatement.setDate(4, date);
+            preparedStatement.setDate(3, date);
+            preparedStatement.setString(4, transacao.getTipoTransacao().name());
+            preparedStatement.setInt(5,id);
             
-            System.out.println(transacao.getTipoTransacao());
-            preparedStatement.setString(5, transacao.getTipoTransacao().name());
-            preparedStatement.setInt(6,id);
-            
-          
-            preparedStatement.executeUpdate();
+            int rowCountResult = preparedStatement.executeUpdate();
 
-            System.out.println(("A Transação foi efetivada!!"));
-            connection.commit();
+            if(rowCountResult <= 0) {
+            	throw new SQLException("Erro ao tentar atualizar a transaçao. "
+            			+ "Nenhuma transaçao foi atualizada, verifique as informações e tente novamente.");
+            	
+            } else {
+                System.out.println(("A Transação foi atualizada!!"));
+                connection.commit();
+            }
+            
+        
         } catch (SQLException e) {
             connection.rollback();
-            throw new SQLException("Erro ao cadastrar transação", e);
+            throw new SQLException("Erro ao atualizar transação", e);
         } finally {
             connection.close();
         }
@@ -99,10 +102,17 @@ public class TransacaoDAOImpl implements TransacaoDAO {
 	            );
 
 	            preparedStatement.setInt(1, id);
-	            preparedStatement.executeUpdate();
+	            int rowCountResult = preparedStatement.executeUpdate();
 
-	            System.out.println(("A transação foi deletada!!"));
-	            connection.commit();
+	            if(rowCountResult <= 0) {
+	            	throw new SQLException("Erro ao tentar deletar a transaçao. "
+	            			+ "Nenhuma transaçao foi deletada, verifique as informações e tente novamente.");
+	            	
+	            } else {
+	                System.out.println(("A Transação foi deletada!!"));
+	                connection.commit();
+	            }
+	            
 	        } catch (SQLException e) {
 	            connection.rollback();
 	            throw new SQLException("Erro ao excluir transação", e);

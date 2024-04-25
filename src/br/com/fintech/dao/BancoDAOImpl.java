@@ -15,13 +15,13 @@ public class BancoDAOImpl implements BancoDAO {
 
     @Override
     public void insert(Banco banco) throws SQLException {
-        sql = "INSERT INTO T_BANCO VALUES (SEQ_AUTOMATIC_T_BANCO_PK.NEXTVAL,?,?)";
+        sql = "INSERT INTO T_BANCO VALUES (?,?,?)";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setInt(1, banco.getCdBanco());
-            preparedStatement.setString(2, banco.getNomeBanco());
+            preparedStatement.setInt(1, banco.getId());
+            preparedStatement.setInt(2, banco.getCdBanco());
+            preparedStatement.setString(3, banco.getNomeBanco());
             preparedStatement.executeUpdate();
 
             System.out.println(("Banco cadastrado com sucesso!!"));
@@ -49,10 +49,17 @@ public class BancoDAOImpl implements BancoDAO {
             preparedStatement.setString(1, banco.getNomeBanco());
             preparedStatement.setInt(2, banco.getCdBanco());
             preparedStatement.setInt(3, id);
-            preparedStatement.executeUpdate();
-
-            System.out.println(("O Banco foi atualizado!!"));
-            connection.commit();
+            
+            int rowCountResult = preparedStatement.executeUpdate();
+            
+            if(rowCountResult <= 0) {
+            	throw new SQLException("Erro ao tentar editar o banco. "
+            			+ "Nenhum banco foi atualizado, verifique as informações e tente novamente.");
+            	
+            } else {
+            	  System.out.println(("O Banco foi atualizado!!"));
+                  connection.commit();
+            }
             
         } catch (SQLException e) {
             connection.rollback();

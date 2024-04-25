@@ -1,8 +1,9 @@
 package br.com.fintech.enums;
 
 public enum TipoInvestimento {
-	CDBS(23),
-	TESOURODIRETOSELIC(21);
+	TESOURODIRETOSELIC(1),
+	CDBS(3);
+
 	
 	private int cd_tipo_investimento;
 	TipoInvestimento(int cd_tipo_investimento) {

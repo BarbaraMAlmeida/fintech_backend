@@ -5,23 +5,32 @@ import java.util.List;
 import br.com.fintech.dao.MetaDAO;
 import br.com.fintech.dao.MetaDAOImpl;
 import br.com.fintech.entities.Meta;
+import br.com.fintech.entities.Usuario;
 
 public class TesteMeta {
     public static void main(String[] args) {
         cadastrarMeta();
+        listarMetas();
         atualizarMeta();
+        listarMetas();
         deletarMeta();
         listarMetas();
     }
 
     public static void cadastrarMeta() {
         try {
-            MetaDAO metaDAO = new MetaDAOImpl();
-
-            Meta meta = new Meta();
-            meta.setNomeMeta("Meta 1");
-            meta.setDtFimMeta(LocalDate.of(2024, 4, 30));
-            metaDAO.insert(meta);
+        	for(int i = 1; i <= 5; i++) {
+	            MetaDAO metaDAO = new MetaDAOImpl();
+	            Usuario usuario = new Usuario();
+	
+	            Meta meta = new Meta();
+	            meta.setId(i);
+	            meta.setNomeMeta("Meta " + i);
+	            meta.setDtFimMeta(LocalDate.of(2024, 4, 30));
+	            usuario.setId(1);
+	            meta.setUsuario(usuario);
+	            metaDAO.insert(meta);
+        	}
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -29,11 +38,11 @@ public class TesteMeta {
 
     public static void atualizarMeta() {
         try {
-            int id = 1;
+            int id = 3;
             MetaDAO metaDAO = new MetaDAOImpl();
             Meta meta = new Meta();
            
-            meta.setNomeMeta("Nova Meta 1");
+            meta.setNomeMeta("Meta atualizada");
             meta.setDtFimMeta(LocalDate.of(2024, 5, 15));
             metaDAO.update(id, meta);
         } catch (SQLException e) {
@@ -43,7 +52,7 @@ public class TesteMeta {
 
     public static void deletarMeta() {
         try {
-            int id = 1;
+            int id = 3;
             MetaDAO metaDAO = new MetaDAOImpl();
             metaDAO.delete(id);
         } catch (SQLException e) {

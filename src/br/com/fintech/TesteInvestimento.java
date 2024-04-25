@@ -14,29 +14,33 @@ public class TesteInvestimento {
 
 	 public static void main(String[] args) {
 		 	cadastrarInvestimento();
-//	        editarInvestimento();
-//	        deletarInvestimento();
-//	        getAllInvestimentos();
+		 	getAllInvestimentos();
+	        editarInvestimento();
+	        getAllInvestimentos();
+	        deletarInvestimento();
+	        getAllInvestimentos();
 	    }
 
 	 public static void cadastrarInvestimento() {
 	        try {
-	            InvestimentoDAO investimentoDAO = new InvestimentoDAOImpl();
-
-	            Investimento investimento = new InvestimentoCDBS();
-	            investimento.setId(67);
-	            Banco banco = new Banco();
-	            banco.setId(21);
-	            investimento.setBanco(banco);
-	            investimento.setTipoInvestimento(TipoInvestimento.CDBS);
-	            Usuario usuario = new Usuario();
-	            usuario.setId(16);
-	            investimento.setUsuario(usuario);
-	            investimento.setValor(3000.0);
-	            investimento.setValorRetirado(13000.0);
-	            investimento.setDtInvestimento(LocalDate.now());
-	            investimento.setDtVencimento(LocalDate.of(2026, 8, 10));
-	            investimentoDAO.insert(investimento);
+	        	for(int i = 1; i <= 5; i++) {
+		            InvestimentoDAO investimentoDAO = new InvestimentoDAOImpl();
+	
+		            Investimento investimento = new InvestimentoCDBS();
+		            investimento.setId(i);
+		            Banco banco = new Banco();
+		            banco.setId(1);
+		            investimento.setBanco(banco);
+		            investimento.setTipoInvestimento(TipoInvestimento.CDBS);
+		            Usuario usuario = new Usuario();
+		            usuario.setId(1);
+		            investimento.setUsuario(usuario);
+		            investimento.setValor(3000.0);
+		            investimento.setValorRetirado(13000.0);
+		            investimento.setDtInvestimento(LocalDate.now());
+		            investimento.setDtVencimento(LocalDate.of(2026, 8, 10));
+		            investimentoDAO.insert(investimento);
+	        	}
 	        }
 	        catch (Exception e) {
 	            e.printStackTrace();
@@ -45,15 +49,15 @@ public class TesteInvestimento {
 
 	    public static void editarInvestimento() {
 	        try {
-	            int idEdit = 26;
+	            int idEdit = 3;
 	            InvestimentoDAO investimentoDAO = new InvestimentoDAOImpl();
 	            Investimento investimento = new InvestimentoCDBS();
 	            Banco banco = new Banco();
-	            banco.setId(21);
+	            banco.setId(2);
 	            investimento.setBanco(banco);
 	            investimento.setDtInvestimento(LocalDate.now());
-	            investimento.setValor(2500.0);
-	            investimento.setValorRetirado(5000.0);
+	            investimento.setValor(1400.0);
+	            investimento.setValorRetirado(55000.0);
 	            
 	            investimentoDAO.update(idEdit, investimento);
 	        }
@@ -64,7 +68,7 @@ public class TesteInvestimento {
 
 	    public static void deletarInvestimento() {
 	        try {
-	            int idEdit = 27;
+	            int idEdit = 3;
 	            InvestimentoDAO investimentoDAO = new InvestimentoDAOImpl();
 
 	            investimentoDAO.delete(idEdit);

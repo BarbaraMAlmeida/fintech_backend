@@ -8,20 +8,26 @@ import java.util.List;
 
 public class TesteCategoria {
     public static void main(String[] args) {
-        cadastrarCategoria();
-        editarCategoria();
-        deletarCategoria();
+    	cadastrarCategoria();
+    	getAllCategorias();
+    	editarCategoria();
+    	getAllCategorias();
+    	deletarCategoria();
         getAllCategorias();
+       
     }
 
     public static void cadastrarCategoria() {
         try {
-            CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
+        	for(int i = 1; i <= 5; i++) {
+        		 CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
-            Categoria categoria = new Categoria();
-            categoria.setNomeCategoria("Categoria java");
-            categoria.setDescricao("Categoria teste inserção pelo java");
-            categoriaDAO.insert(categoria);
+                 Categoria categoria = new Categoria();
+                 categoria.setId(i);
+                 categoria.setNomeCategoria("Categoria " + i);
+                 categoria.setDescricao("Categoria teste inserção pelo java");
+                 categoriaDAO.insert(categoria);
+        	}  
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -30,7 +36,7 @@ public class TesteCategoria {
 
     public static void editarCategoria() {
         try {
-            int idEdit = 70;
+            int idEdit = 3;
             CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
             Categoria categoria = new Categoria();
 
@@ -45,7 +51,7 @@ public class TesteCategoria {
 
     public static void deletarCategoria() {
         try {
-            int idEdit = 69;
+            int idEdit = 3;
             CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
             categoriaDAO.delete(idEdit);

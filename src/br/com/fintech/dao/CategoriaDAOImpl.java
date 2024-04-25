@@ -15,20 +15,23 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
     @Override
     public void insert(Categoria categoria) throws SQLException {
-        sql = "INSERT INTO T_CATEGORIA VALUES (SEQ_AUTOMATIC_T_CATEGORIA_PK.NEXTVAL, ? , ?)";
+        sql = "INSERT INTO T_CATEGORIA VALUES (?, ? , ?)";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, categoria.getNomeCategoria());
-            preparedStatement.setString(2, categoria.getDescricao());
+            preparedStatement.setInt(1, categoria.getId());
+            preparedStatement.setString(2, categoria.getNomeCategoria());
+            preparedStatement.setString(3, categoria.getDescricao());
             preparedStatement.executeUpdate();
-
             System.out.println(("A categoria foi gravada!!"));
+
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
+            System.out.println(e);
            throw new SQLException("Erro ao cadastrar categoria", e);
+        } finally {
+        	connection.close();
         }
 
     }
@@ -61,7 +64,10 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         catch (Exception e) {
         	connection.rollback();
         	System.err.println(e);
+        } finally {
+        	connection.close();
         }
+
         
         return categoria;
 
@@ -92,7 +98,10 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         } catch (Exception e) {
         	connection.rollback();
         	System.err.println(e);
+        } finally {
+        	connection.close();
         }
+
     }
 
     @Override
@@ -117,7 +126,10 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         } catch (SQLException e) {
             connection.rollback();
             throw new SQLException("Erro ao cadastrar categoria", e);
+        } finally {
+        	connection.close();
         }
+
 
         return listCategorias;
     }

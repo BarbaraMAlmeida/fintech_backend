@@ -5,7 +5,7 @@ import java.io.Serializable;
 public abstract class Moeda implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-    private Double valor;
+    private double valor;
 
     public Moeda() {
 

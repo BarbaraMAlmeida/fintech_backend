@@ -17,16 +17,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     
     @Override
     public void insert(Usuario Usuario) throws SQLException {
-        sql = "INSERT INTO T_USUARIO VALUES (SEQ_AUTOMATIC_T_USUARIO_PK.NEXTVAL,?,?,?,?,?)";
+        sql = "INSERT INTO T_USUARIO VALUES (?,?,?,?,?,?)";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, Usuario.getNomeUsuario());
-            preparedStatement.setInt(2, Usuario.getGenero().getId());
+            preparedStatement.setInt(1, Usuario.getId());
+            preparedStatement.setString(2, Usuario.getNomeUsuario());
+            preparedStatement.setInt(3, Usuario.getGenero().getId());
             Date date = Date.valueOf(Usuario.getDtNascimento());
-            preparedStatement.setDate(3, date);
-            preparedStatement.setString(4, Usuario.getEmail());
-            preparedStatement.setString(5, Usuario.getSenha());
+            preparedStatement.setDate(4, date);
+            preparedStatement.setString(5, Usuario.getEmail());
+            preparedStatement.setString(6, Usuario.getSenha());
             preparedStatement.executeUpdate();
 
             System.out.println(("O usuário foi gravado!!"));
@@ -42,24 +43,29 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     
     @Override
     public Usuario update(int id, Usuario Usuario) throws SQLException {
-        sql = "UPDATE T_USUARIO SET CD_USUARIO = ? , NM_USUARIO = ?, CD_GENERO = ?, DT_NASCIMENTO = ?, EMAIL = ?, SENHA = ? WHERE CD_USUARIO = ?";
+        sql = "UPDATE T_USUARIO SET NM_USUARIO = ?, EMAIL = ? WHERE CD_USUARIO = ?";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(
                     sql
             );
 
-            preparedStatement.setInt(1, Usuario.getId());
-            preparedStatement.setString(2, Usuario.getNomeUsuario());
-            Date date = Date.valueOf(Usuario.getDtNascimento());
-            preparedStatement.setDate(3, date);
-            preparedStatement.setInt(4, Usuario.getGenero().getId());
-            preparedStatement.setString(5, Usuario.getEmail());
-            preparedStatement.setString(6, Usuario.getSenha());
-            preparedStatement.executeUpdate();
+            preparedStatement.setString(1, Usuario.getNomeUsuario());
+            preparedStatement.setString(2, Usuario.getEmail());
+            preparedStatement.setInt(3, id);
+            
+            int rowCountResult = preparedStatement.executeUpdate();
+            
+            if(rowCountResult <= 0) {
+            	throw new SQLException("Erro ao tentar editar o usuario. "
+            			+ "Nenhum usuario foi atualizado, verifique as informações e tente novamente.");
+            	
+            } else {
+            	 System.out.println(("O usuário foi atualizado!!"));
+                 connection.commit();
+            }
 
-            System.out.println(("O usuário foi atualizada!!"));
-            connection.commit();
+           
         } catch (SQLException e) {
             connection.rollback();
             throw new SQLException("Erro ao editar usuário", e);
@@ -81,7 +87,18 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             );
 
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            
+            int rowCountResult = preparedStatement.executeUpdate();
+            
+            if(rowCountResult <= 0) {
+            	throw new SQLException("Erro ao tentar deletar o usuario. "
+            			+ "Nenhum usuario foi deletado, verifique as informações e tente novamente.");
+            	
+            } else {
+            	 System.out.println(("O usuário foi atualizado!!"));
+                 connection.commit();
+            }
+            
 
             System.out.println(("O usuário foi deletado!!"));
             connection.commit();

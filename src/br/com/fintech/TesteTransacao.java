@@ -12,26 +12,32 @@ import br.com.fintech.enums.TipoTransacao;
 public class TesteTransacao {
 	public static void main(String[] args) {
         cadastrarTransacao();
+        getAllTransacao();
         editarTransacao();
+        getAllTransacao();
         deletarTransacao();
         getAllTransacao();
     }
 
     public static void cadastrarTransacao() {
         try {
-            TransacaoDAO transacaoDAO = new TransacaoDAOImpl();
-            
-            Transacao transacao = new Transacao();
-            transacao.setId(20);
-            Usuario usuario = new Usuario ();
-            usuario.setId(1);
-            transacao.setUsuario(usuario);
-            transacao.setValTransacao(2200.0);
-            transacao.setDtLancamento(LocalDate.now());
-            transacao.setTipoTransacao(TipoTransacao.DESPESA);
-            Categoria categoria = new Categoria(2,"Salário freela", "Teste1");
-            transacao.setCategoria(categoria);
-            transacaoDAO.insert (transacao);
+        	for(int i = 1; i <= 5; i++) {
+	            TransacaoDAO transacaoDAO = new TransacaoDAOImpl();
+	            
+	            Transacao transacao = new Transacao();
+	            transacao.setId(i);
+	            Usuario usuario = new Usuario ();
+	            usuario.setId(1);
+	            transacao.setUsuario(usuario);
+	            transacao.setValTransacao(2200.0);
+	            transacao.setDtLancamento(LocalDate.now());
+	            transacao.setTipoTransacao(TipoTransacao.DESPESA);
+	            Categoria categoria = new Categoria();
+	            categoria.setId(1);
+	            transacao.setCategoria(categoria);
+	            
+	            transacaoDAO.insert(transacao);
+        	}
             
         }
         catch (Exception e) {
@@ -40,7 +46,7 @@ public class TesteTransacao {
     }
     public static void editarTransacao() {
         try {
-            int idEdit = 20;
+            int idEdit = 3;
             TransacaoDAO transacaoDAO = new TransacaoDAOImpl();
             Transacao transacao = new Transacao();
             
@@ -50,7 +56,7 @@ public class TesteTransacao {
             transacao.setUsuario(usuario);
             transacao.setValTransacao(1100.0);
             transacao.setDtLancamento(LocalDate.now());
-            transacao.setTipoTransacao(TipoTransacao.DESPESA);
+            transacao.setTipoTransacao(TipoTransacao.RECEITA);
             Categoria categoria = new Categoria(2,"Salário freela", "Teste1");
             transacao.setCategoria(categoria);
             transacaoDAO.update (idEdit, transacao);
@@ -63,7 +69,7 @@ public class TesteTransacao {
 
     public static void deletarTransacao() {
         try {
-            int idEdit = 20;
+            int idEdit = 3;
             TransacaoDAO TransacaoDAO = new TransacaoDAOImpl();
 
             TransacaoDAO.delete(idEdit);

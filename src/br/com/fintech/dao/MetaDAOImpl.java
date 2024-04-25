@@ -18,17 +18,16 @@ public class MetaDAOImpl implements MetaDAO {
     
     @Override
     public void insert(Meta meta) throws SQLException {
-        String sql = "INSERT INTO T_META (cd_meta, nm_meta, cd_usuario, val_meta, dt_fim_meta) VALUES (SEQ_AUTOMATIC_T_META_PK.NEXTVAL, ?, ?, ?, ?)";
+        String sql = "INSERT INTO T_META (cd_meta, nm_meta, cd_usuario, val_meta, dt_fim_meta) VALUES (?, ?, ?, ?, ?)";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, meta.getNomeMeta());
-            Usuario usuario = new Usuario();
-        	usuario.setId(26);
-            preparedStatement.setInt(2, usuario.getId());
-            preparedStatement.setDouble(3, meta.getValor());
+            preparedStatement.setInt(1, meta.getId());
+            preparedStatement.setString(2, meta.getNomeMeta());
+            preparedStatement.setInt(3, meta.getUsuario().getId());
+            preparedStatement.setDouble(4, meta.getValor());
             Date date = Date.valueOf(meta.getDtFimMeta());
-            preparedStatement.setDate(4, date);
+            preparedStatement.setDate(5, date);
             preparedStatement.executeUpdate();
 
             System.out.println("A meta foi gravada!!");
