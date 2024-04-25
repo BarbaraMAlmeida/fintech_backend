@@ -41,7 +41,7 @@ public class MetaDAOImpl implements MetaDAO {
 
     @Override
     public Meta update(int id, Meta meta) throws SQLException {
-        String sql = "UPDATE T_META SET nomeMeta = ?, dtFimMeta = ? WHERE CD_META = ?";
+        String sql = "UPDATE T_META SET NM_META = ?, DT_FIM_META = ? WHERE CD_META = ?";
         try {
         	connection = FintechDB.getConnectionDB();
             preparedStatement = connection.prepareStatement(sql);
