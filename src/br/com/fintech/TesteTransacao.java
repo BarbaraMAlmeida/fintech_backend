@@ -11,9 +11,9 @@ import br.com.fintech.enums.TipoTransacao;
 
 public class TesteTransacao {
 	public static void main(String[] args) {
-        //cadastrarTransacao();
-      //editarTransacao();
-        //deletarTransacao();
+        cadastrarTransacao();
+        editarTransacao();
+        deletarTransacao();
         getAllTransacao();
     }
 
@@ -22,9 +22,9 @@ public class TesteTransacao {
             TransacaoDAO transacaoDAO = new TransacaoDAOImpl();
             
             Transacao transacao = new Transacao();
-
+            transacao.setId(20);
             Usuario usuario = new Usuario ();
-            usuario.setId(4);
+            usuario.setId(1);
             transacao.setUsuario(usuario);
             transacao.setValTransacao(2200.0);
             transacao.setDtLancamento(LocalDate.now());
@@ -40,7 +40,7 @@ public class TesteTransacao {
     }
     public static void editarTransacao() {
         try {
-            int idEdit = 28;
+            int idEdit = 20;
             TransacaoDAO transacaoDAO = new TransacaoDAOImpl();
             Transacao transacao = new Transacao();
             

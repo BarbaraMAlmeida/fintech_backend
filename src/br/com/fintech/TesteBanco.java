@@ -13,7 +13,7 @@ public class TesteBanco {
     	cadastrarBanco();
     	editarBanco();
     	getAllBancos();
-    	deletarBanco();
+    	//deletarBanco(); --- REVISAR
     }
 
     public static void cadastrarBanco() {
@@ -49,7 +49,7 @@ public class TesteBanco {
 
     public static void deletarBanco() {
         try {
-            int idEdit = 67;
+            int idEdit = 47;
             BancoDAO bancoDAO = new BancoDAOImpl();
 
             bancoDAO.delete(idEdit);

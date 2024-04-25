@@ -77,6 +77,7 @@ public class BancoDAOImpl implements BancoDAO {
 
             preparedStatement.setInt(1, id);
             int rowCountResult = preparedStatement.executeUpdate();
+            System.out.println(rowCountResult);
             
             if(rowCountResult <= 0) {
             	throw new SQLException("Erro ao tentar deletar o banco. "

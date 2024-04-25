@@ -5,13 +5,12 @@ import java.util.List;
 import br.com.fintech.dao.MetaDAO;
 import br.com.fintech.dao.MetaDAOImpl;
 import br.com.fintech.entities.Meta;
-import br.com.fintech.entities.Usuario;
 
 public class TesteMeta {
     public static void main(String[] args) {
-        //cadastrarMeta();
-        //atualizarMeta();
-       // deletarMeta();
+        cadastrarMeta();
+        atualizarMeta();
+        deletarMeta();
         listarMetas();
     }
 
@@ -22,10 +21,6 @@ public class TesteMeta {
             Meta meta = new Meta();
             meta.setNomeMeta("Meta 1");
             meta.setDtFimMeta(LocalDate.of(2024, 4, 30));
-            meta.setValor(5000.00);
-            Usuario usuario = new Usuario();
-            usuario.setId(1);
-            meta.setUsuario(usuario);
             metaDAO.insert(meta);
         } catch (SQLException e) {
             e.printStackTrace();
